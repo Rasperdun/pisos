@@ -39,6 +39,12 @@ def main():
         screen.fill("black", rect=None, special_flags=0)
         updatable.update(dt)
 
+        for aster in asteroids:
+            if aster.collides_with(player):
+                log_event("player_hit")
+                print("Game over!")
+                sys.exit()
+
         for drawing in drawable:
             drawing.draw(screen)
             
