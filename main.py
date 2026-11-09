@@ -15,6 +15,10 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
 
+    icon = pygame.image.load("boomer.png")
+    pygame.display.set_icon(icon)
+    pygame.display.set_caption("Game made by Пердольф Пуклер")
+
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
