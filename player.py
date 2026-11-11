@@ -9,7 +9,14 @@ class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        icon = pygame.image.load("rocket.png").convert_alpha()
+        self.image = pygame.transform.scale(icon, (PLAYER_RADIUS * 3, PLAYER_RADIUS * 3))
         self.shoot_timer = 0
+
+    def draw(self, screen):
+        rotated = pygame.transform.rotate(self.image, (180 - self.rotation))
+        rect = rotated.get_rect(center=self.position)
+        screen.blit(rotated, rect)
     
     def triangle(self) -> list[pygame.Vector2]:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)

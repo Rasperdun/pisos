@@ -15,8 +15,6 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
 
-    icon = pygame.image.load("boomer.png")
-    pygame.display.set_icon(icon)
     pygame.display.set_caption("Game made by Пердольф Пуклер")
 
     updatable = pygame.sprite.Group()
@@ -29,8 +27,8 @@ def main():
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
 
-    player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
     asteroidfield = AsteroidField()
 
     clock = pygame.time.Clock()
