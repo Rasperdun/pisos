@@ -15,6 +15,10 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
 
+    font = pygame.font.Font(None, 40)   # None = шрифт по умолчанию, 36 = размер
+    big_font = pygame.font.Font(None, 90)
+    score = 0
+
     pygame.display.set_caption("Game made by Пердольф Пуклер")
 
     updatable = pygame.sprite.Group()
@@ -46,6 +50,15 @@ def main():
         updatable.update(dt)
 
         for aster in asteroids:
+            for aster2 in asteroids:
+                if aster2 == aster:
+                    pass
+                else:
+                    if aster.collides_with(aster2):
+                        log_event("aster_bump")
+                        aster.velocity = aster.velocity.rotate(90)
+                        aster2.velocity = aster2.velocity.rotate(90)
+
             if aster.collides_with(player):
                 log_event("player_hit")
                 print("Game over!")
@@ -55,9 +68,26 @@ def main():
                     log_event("asteroid_shot")
                     shot.kill()
                     aster.split()
+                    score += 5
+
+
 
         for drawing in drawable:
             drawing.draw(screen)
+
+        text1 = font.render(f"dt: {dt}", True, "white")
+        text2 = font.render(f"Хуёвый счёт: {score}", True, "white")
+        screen.blit(text1, (10, 10))
+        screen.blit(text2, (10, 50))
+
+        if score >= 100:
+            text = big_font.render("ПОБЕДА", True, "white")
+            rect = text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
+            screen.blit(text, rect)
+            pygame.display.flip()      # ВАЖНО: показать надпись до ожидания
+            pygame.time.wait(8000)     # миллисекунды
+            sys.exit()
+
             
         pygame.display.flip()
     

@@ -29,3 +29,8 @@ class Asteroid(CircleShape):
             aster2 = Asteroid(self.position.x, self.position.y, new_radius)
             aster1.velocity = velocity1 * 1.2
             aster2.velocity = velocity2 * 1.2
+            aster1.CAN_COLLIDE = False
+            aster2.CAN_COLLIDE = False
+            
+            aster1.CAN_COLLIDE = True
+            aster2.CAN_COLLIDE = True
